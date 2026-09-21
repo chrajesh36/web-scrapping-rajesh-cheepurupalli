@@ -1,0 +1,60 @@
+{
+  "providers": [
+    {
+      "provider": "frontier",
+      "provider_label": "Frontier Communications",
+      "engine": "recipe",
+      "enabled": true,
+      "domain": "telecom",
+      "allowed_host": "frontier.com",
+      "allowed_domains": ["frontier.com"],
+      "max_concurrent": 3,
+      "max_retry_allowed": 2,
+      "diagnose_enabled": false,
+      "internet_url_candidates": [
+        "https://frontier.com/shop/internet",
+        "https://frontier.com/buy"
+      ],
+      "address_input_selectors": [
+        "#street-address",
+        "input.address-form__input",
+        "input[placeholder*='Street Address' i]",
+        "input[placeholder*='Enter your address' i]",
+        "input[aria-label*='address' i]"
+      ],
+      "scope_body_signals": {
+        "CURRENT_CUSTOMER": [
+          "already a frontier customer",
+          "current customer"
+        ],
+        "PROSPECT_CUSTOMER": [
+          "are you moving to this address",
+          "view plan",
+          "add to cart",
+          "/mo"
+        ],
+        "PROVIDER_NOT_AVAILABLE": [
+          "technical difficulties",
+          "isn't available at your address",
+          "not available at your address"
+        ],
+        "UNKNOWN_ADDRESS": [
+          "address not found",
+          "invalid address",
+          "couldn't find",
+          "could not find"
+        ]
+      },
+      "scope_url_signals": {
+        "PROVIDER_NOT_AVAILABLE": ["allconnect.com"]
+      },
+      "recipe": {
+        "note": "Declarative steps live in dca_frontier.seeds.frontier_seed_recipe",
+        "steps": ["step0", "step1_address", "step2a", "step2b", "step3a"]
+      },
+      "step_defaults": {
+        "vision_agent_enabled": false
+      }
+    }
+  ]
+}

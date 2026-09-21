@@ -11,3 +11,7 @@ logs/**/*.xlsx
 credentials.json
 *.pem
 *.key
+
+# crawler build
+*.egg-info/
+crawler/*.egg-info/

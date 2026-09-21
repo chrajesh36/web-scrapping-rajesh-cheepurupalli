@@ -1,56 +1,47 @@
-# Verizon Broadband Plans Automation
+# Web scraping — Rajesh Cheepurupalli
 
-A small Python + Playwright script that opens Verizon's home internet plans
-page, enters a service address, then clicks through each broadband plan card
-in the results before closing the browser.
+Frontier (and Verizon research) broadband plan extraction, packaged for
+drop-in to **deadshot-plugins-ai** as a Tier-1 deterministic provider.
 
-## Prerequisites
+## Repo layout
 
-- Python 3.9+
-- macOS/Linux/Windows
+| Path | Purpose |
+|------|---------|
+| `crawler/dca_frontier/` | Playwright recipe: seeds, decoder, offer extractor |
+| `crawler/dca_recipe_engine/` | Schema stubs + **deterministic-only** Frontier healer |
+| `crawler/ai_agents_config/` | Provider config (`engine: recipe`, no vision/LLM) |
+| `crawler/run_addresses.py` | Live smoke test |
+| `tracer/test/` | Package unit tests |
+| `docs/FRONTIER_PROVIDER_ONBOARDING.md` | Onboarding checklist |
+| `legacy/` | Original nodriver / L3–L6 bot-evasion research scripts |
+| `logs/`, `reports/` | Capture artifacts |
 
 ## Setup
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e ./crawler
+pip install pytest
 python -m playwright install chromium
 ```
 
-## Run
+## Tests
 
 ```bash
-python verizon_plans.py
+pytest tracer/test -q
 ```
 
-A Chromium window will open, load `https://www.verizon.com/home/internet/`,
-enter the hardcoded address, then click each plan card in turn. Progress
-messages are printed to the console.
+## Live smoke (Frontier)
 
-## Configuring the address
-
-Edit the `ADDRESS` dict at the top of `verizon_plans.py`:
-
-```python
-ADDRESS = {
-    "street": "140 West Street",
-    "unit": "",
-    "city": "New York",
-    "state": "NY",
-    "zip": "10007",
-}
+```bash
+python crawler/run_addresses.py --provider frontier \
+  --address "1308 Chase St, Novato, CA 94945"
 ```
 
-## Notes on selectors
+Expect `llm_calls=0` and no self-heal log lines.
 
-Verizon updates their site frequently. The script tries multiple selector
-strategies for each step (address input, submit button, plan cards, CTAs),
-so it should survive small changes. If a step fails, run with the browser
-visible (the default) and inspect the DOM in DevTools, then add a matching
-selector to the appropriate `*_candidates` list in `verizon_plans.py`.
+## Legacy research
 
-## Tuning waits
-
-All timeouts and pauses are centralized in the `Timing` dataclass near the
-top of the script. Increase `page_load` or `element` on slower networks.
+Nodriver Level 6 scripts, scorecards, and batch checkers live under `legacy/`.
+See `docs/FRONTIER_PROVIDER_ONBOARDING.md` for the deadshot port checklist.
