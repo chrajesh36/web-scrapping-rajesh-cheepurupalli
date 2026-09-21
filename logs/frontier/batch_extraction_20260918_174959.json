@@ -1,0 +1,186 @@
+{
+  "timestamp": "2026-09-18T17:49:59.933667",
+  "total_addresses": 20,
+  "results": [
+    {
+      "address": "1425 Oates Dr, Mesquite, TX 75150",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=6995de7b-e52f-4cf3-8c2b-5c9000b191e8",
+      "elapsed_s": 19.1
+    },
+    {
+      "address": "3302 Beltline Rd, Garland, TX 75044",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 22.0
+    },
+    {
+      "address": "910 W Avenue B, Garland, TX 75040",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=e12ea711-41ed-4ebb-912b-774b8f44c24e",
+      "elapsed_s": 19.0
+    },
+    {
+      "address": "2200 Coit Rd, Plano, TX 75075",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-soft/",
+      "elapsed_s": 19.5
+    },
+    {
+      "address": "800 N Greenville Ave, Allen, TX 75002",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=9f729fc0-1990-491b-991e-b6c63f9f672f",
+      "elapsed_s": 21.0
+    },
+    {
+      "address": "120 Elm St, New Haven, CT 06510",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=c56676d9-03c8-4da8-a495-103c8aa9f6dc",
+      "elapsed_s": 16.9
+    },
+    {
+      "address": "45 Wall St, Norwalk, CT 06850",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=3f2e846b-aee2-4c3d-b363-8c74510c138f",
+      "elapsed_s": 19.6
+    },
+    {
+      "address": "200 Atlantic St, Bridgeport, CT 06604",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 19.6
+    },
+    {
+      "address": "100 Trumbull St, Hartford, CT 06103",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=fca645f2-20c2-4e51-8536-f21f266e6931",
+      "elapsed_s": 20.0
+    },
+    {
+      "address": "15 Broad St, Milford, CT 06460",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 20.8
+    },
+    {
+      "address": "4021 W Spruce St, Tampa, FL 33607",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=366ac3fb-abfb-491c-ba39-a3275ca159a8",
+      "elapsed_s": 24.4
+    },
+    {
+      "address": "1200 N Federal Hwy, Fort Lauderdale, FL 33304",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 22.2
+    },
+    {
+      "address": "500 S Australian Ave, West Palm Beach, FL 33401",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 20.9
+    },
+    {
+      "address": "100 E Market St, Indianapolis, IN 46204",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 22.2
+    },
+    {
+      "address": "200 Main St, Evansville, IN 47708",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 20.9
+    },
+    {
+      "address": "100 W Broadway, Long Beach, CA 90802",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 20.7
+    },
+    {
+      "address": "500 N Brand Blvd, Glendale, CA 91203",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 18.4
+    },
+    {
+      "address": "100 State St, Rochester, NY 14614",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 20.0
+    },
+    {
+      "address": "200 E Washington St, Syracuse, NY 13202",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 12.9
+    },
+    {
+      "address": "742 Evergreen Terrace, Springfield, IL 62704",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 12.0
+    }
+  ]
+}

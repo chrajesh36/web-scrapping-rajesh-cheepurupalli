@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "address": "1425 Oates Dr, Mesquite, TX 75150",
+      "state": "TX",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 72.67807412147522
+    },
+    {
+      "address": "305 S Broadway, Tyler, TX 75702",
+      "state": "TX",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 66.06982088088989
+    },
+    {
+      "address": "4810 Ave H, Austin, TX 78751",
+      "state": "TX",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 62.37822914123535
+    }
+  ]
+}

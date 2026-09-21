@@ -1,0 +1,26 @@
+{
+  "address": "2727 LBJ Freeway, Dallas, TX 75234",
+  "scope": "PROSPECT_CUSTOMER",
+  "scope_reason": "Page shows plan offers (fiber/pricing detected in DOM)",
+  "offers": [
+    {
+      "name": "Enter your address to view plans and exclusive offers.\n\nYou may be eligible for special offers, like free installation and a Wi-Fi router included in your plan.",
+      "price": "",
+      "speed": "",
+      "description": "Enter your address to view plans and exclusive offers.\n\nYou may be eligible for special offers, like free installation and a Wi-Fi router included in your plan.",
+      "features": [
+        "You may be eligible for special offers, like free installation and a Wi-Fi router included in your plan."
+      ],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Enter your address to view plans and exclusive offers.",
+      "price": "",
+      "speed": "",
+      "description": "Enter your address to view plans and exclusive offers.",
+      "features": [],
+      "broadband_facts": ""
+    }
+  ],
+  "raw_api_responses": {}
+}

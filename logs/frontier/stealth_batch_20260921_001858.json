@@ -1,0 +1,11 @@
+{
+  "results": [
+    {
+      "address": "1308 Chase St, Novato, CA 94945",
+      "state": "CA",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Plans did not load after address submission",
+      "elapsed_s": 60.81735897064209
+    }
+  ]
+}

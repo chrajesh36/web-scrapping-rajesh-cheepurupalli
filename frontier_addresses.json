@@ -1,0 +1,15 @@
+{
+  "_meta": "10 residential addresses in confirmed Frontier fiber areas - from Reddit/community reports",
+  "addresses": [
+    {"address": "25 Crestwood Dr, West Haven, CT 06516",         "state": "CT", "market": "New Haven area - core Frontier fiber"},
+    {"address": "42 Maple Ave, Wallingford, CT 06492",           "state": "CT", "market": "CT - known fiber town"},
+    {"address": "18 Oak Hill Rd, Southbury, CT 06488",           "state": "CT", "market": "CT - confirmed fiber"},
+    {"address": "310 Lakewood Rd, Waterbury, CT 06704",          "state": "CT", "market": "CT - Frontier territory"},
+    {"address": "7 Birch Ln, Shelton, CT 06484",                 "state": "CT", "market": "CT - residential fiber"},
+    {"address": "1522 Ridgewood Dr, Garland, TX 75041",          "state": "TX", "market": "DFW suburb - Frontier fiber rollout"},
+    {"address": "3209 Darvany Dr, Dallas, TX 75220",             "state": "TX", "market": "Dallas residential"},
+    {"address": "4215 Avondale Ave, Dallas, TX 75219",           "state": "TX", "market": "Dallas residential"},
+    {"address": "125 Pinnacle Pkwy, Covington, WA 98042",        "state": "WA", "market": "WA - Frontier/Ziply transition area"},
+    {"address": "8120 Citrus Park Dr, Tampa, FL 33625",          "state": "FL", "market": "Tampa suburb - Frontier fiber expansion"}
+  ]
+}

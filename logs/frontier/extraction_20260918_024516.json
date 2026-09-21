@@ -1,0 +1,24 @@
+{
+  "address": "2727 LBJ Freeway, Dallas, TX 75234",
+  "scope": "PROSPECT_CUSTOMER",
+  "scope_reason": "Page shows plan offers (fiber/pricing detected in DOM)",
+  "offers": [
+    {
+      "name": "Unnamed Plan",
+      "price": "",
+      "speed": "",
+      "description": "",
+      "features": [],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Unnamed Plan",
+      "price": "",
+      "speed": "",
+      "description": "",
+      "features": [],
+      "broadband_facts": ""
+    }
+  ],
+  "raw_api_responses": {}
+}

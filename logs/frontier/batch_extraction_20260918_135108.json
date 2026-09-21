@@ -1,0 +1,186 @@
+{
+  "timestamp": "2026-09-18T13:51:08.459281",
+  "total_addresses": 20,
+  "results": [
+    {
+      "address": "1425 Oates Dr, Mesquite, TX 75150",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 2068.4
+    },
+    {
+      "address": "3302 Beltline Rd, Garland, TX 75044",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1101.2
+    },
+    {
+      "address": "910 W Avenue B, Garland, TX 75040",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1524.3
+    },
+    {
+      "address": "2200 Coit Rd, Plano, TX 75075",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 3761.1
+    },
+    {
+      "address": "800 N Greenville Ave, Allen, TX 75002",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 2097.7
+    },
+    {
+      "address": "120 Elm St, New Haven, CT 06510",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1006.9
+    },
+    {
+      "address": "45 Wall St, Norwalk, CT 06850",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1436.1
+    },
+    {
+      "address": "200 Atlantic St, Bridgeport, CT 06604",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1169.2
+    },
+    {
+      "address": "100 Trumbull St, Hartford, CT 06103",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 2061.2
+    },
+    {
+      "address": "15 Broad St, Milford, CT 06460",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1531.9
+    },
+    {
+      "address": "4021 W Spruce St, Tampa, FL 33607",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1107.4
+    },
+    {
+      "address": "1200 N Federal Hwy, Fort Lauderdale, FL 33304",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 238.9
+    },
+    {
+      "address": "500 S Australian Ave, West Palm Beach, FL 33401",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 1485.7
+    },
+    {
+      "address": "100 E Market St, Indianapolis, IN 46204",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 798.2
+    },
+    {
+      "address": "200 Main St, Evansville, IN 47708",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 668.7
+    },
+    {
+      "address": "100 W Broadway, Long Beach, CA 90802",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 2256.3
+    },
+    {
+      "address": "500 N Brand Blvd, Glendale, CA 91203",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 2365.1
+    },
+    {
+      "address": "100 State St, Rochester, NY 14614",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 942.7
+    },
+    {
+      "address": "200 E Washington St, Syracuse, NY 13202",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 41.0
+    },
+    {
+      "address": "742 Evergreen Terrace, Springfield, IL 62704",
+      "scope": "INVALID_ADDRESS",
+      "reason": "CHECK AVAILABILITY button not found",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 570.0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "address": "2727 LBJ Freeway, Dallas, TX 75234",
+  "scope": "INVALID_ADDRESS",
+  "scope_reason": "Extraction failed: 'list' object has no attribute 'get'",
+  "offers": [],
+  "raw_api_responses": {}
+}

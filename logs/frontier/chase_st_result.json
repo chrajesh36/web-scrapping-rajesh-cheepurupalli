@@ -1,0 +1,21 @@
+{
+  "address": "1308 Chase St, Novato, CA 94945",
+  "scope": "PROSPECT_CUSTOMER",
+  "reason": "Address is serviceable \u2014 Frontier asked 'Are you moving to this address?' (clicked=clicked_yes_moving); prospect / new-customer path",
+  "mover": "clicked_yes_moving",
+  "offers": [],
+  "snapshot": {
+    "url": "https://frontier.com/buy",
+    "inputValue": "1308 Chase St - Novato CA 94945",
+    "bodyLen": 1031,
+    "preview": "Enter your address to view plans and exclusive offers.\n\nYou may be eligible for special offers, like free installation and a Wi-Fi router included in your plan.\n\nEnter your address to check availability\nCHECK AVAILABILITY\nFrontier\u00ae Fiber Internet available in select areas.\nGet more than just great internet. Join Frontier and get access to these special deals.\n\nGuaranteed pricing\n\nNo surprise price hikes. Get reliable internet with peace of mind and all-in pricing.\n\nGet Whole-Home Wi-Fi on us\n\nSupercharge your Wi-Fi coverage throughout your home. Free with Fiber 1 Gig or faster.\n\nFree expert installation\n\nGet a hassle-free setup from an expert technician, free with Fiber 1 Gig or faster.\n\n\u00a9 2026 Verizon\n\nHome\nSite Map\nPolicies & Notifications\nTerms & Conditions\nPrivacy Policy\nCalifornia Privacy Policy\nCT, NE, TX Privacy Policy\nDo Not Sell or Share My Personal Information\n X\n Facebook\n LinkedIn\n YouTube\n Instagram\nFind your way to better internet with a recommendation tailored to your needs.\nFIND MY FIT\nSHOP ALL PLANS",
+    "tail": "Enter your address to view plans and exclusive offers.\n\nYou may be eligible for special offers, like free installation and a Wi-Fi router included in your plan.\n\nEnter your address to check availability\nCHECK AVAILABILITY\nFrontier\u00ae Fiber Internet available in select areas.\nGet more than just great internet. Join Frontier and get access to these special deals.\n\nGuaranteed pricing\n\nNo surprise price hikes. Get reliable internet with peace of mind and all-in pricing.\n\nGet Whole-Home Wi-Fi on us\n\nSupercharge your Wi-Fi coverage throughout your home. Free with Fiber 1 Gig or faster.\n\nFree expert installation\n\nGet a hassle-free setup from an expert technician, free with Fiber 1 Gig or faster.\n\n\u00a9 2026 Verizon\n\nHome\nSite Map\nPolicies & Notifications\nTerms & Conditions\nPrivacy Policy\nCalifornia Privacy Policy\nCT, NE, TX Privacy Policy\nDo Not Sell or Share My Personal Information\n X\n Facebook\n LinkedIn\n YouTube\n Instagram\nFind your way to better internet with a recommendation tailored to your needs.\nFIND MY FIT\nSHOP ALL PLANS",
+    "hasDollar": false,
+    "hasViewPlan": true,
+    "hasMover": false,
+    "technical": false,
+    "notAvailable": false,
+    "existing": false
+  },
+  "checked": "2026-09-21T00:40:29.323446"
+}

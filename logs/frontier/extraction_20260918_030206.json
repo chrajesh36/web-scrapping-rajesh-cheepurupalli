@@ -1,0 +1,69 @@
+{
+  "address": "4506 Elm Street, Dallas, TX 75226",
+  "scope": "PROSPECT_CUSTOMER",
+  "scope_reason": "Found 6 plan(s) with pricing in DOM",
+  "offers": [
+    {
+      "name": "Internet\n\n\n4",
+      "price": "$40",
+      "speed": "2000 Mbps",
+      "description": "Internet\n\n\n4,381 customer reviews\nPlans starting at\n$40\n\n/mo\n\nSpeeds up to\n2000 Mbps\nContract length\nNone\nConnection type\nCable\n5-Year Price Guarantee\nView details\nCall to learn more:\n(833) 218-2417\nCheck plans with Xfinity\n\nAT&T ",
+      "features": [
+        "Speeds up to"
+      ],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Internet\n\n\n3",
+      "price": "$35",
+      "speed": "5000 Mbps",
+      "description": "Internet\n\n\n3,944 customer reviews\nPlans starting at\n$35\n\n/mo*\n\nfor 12 mos.\nSpeeds up to\n5000 Mbps\nContract length\nNone\nConnection type\nFiber\nSpecial promotions\n\n*Price for new customers in select households after discounts. Subj to change. Ltd. avail/areas. Terms & restr’s apply.\n\nView details\nCall to learn more:\n(844) 383-0017\nCheck plans with AT&T\n\nT-Mobile ",
+      "features": [
+        "Speeds up to"
+      ],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Internet\n\n\n1",
+      "price": "$35",
+      "speed": "500 Mbps",
+      "description": "Internet\n\n\n1,712 customer reviews\nPlans starting at\n$35\n\n/mo\n\nfor 12 mos.\nSpeeds up to\n500 Mbps\nContract length\nNone\nConnection type\nWireless\nFirst month + up to $200 back\nView details\nCall to learn more:\n(844) 224-7479\nCheck plans with T‑Mobile\n\nXfinity ",
+      "features": [
+        "Speeds up to"
+      ],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Internet\n\n\n4",
+      "price": "$40",
+      "speed": "2000 Mbps",
+      "description": "Internet\n\n\n4,381 customer reviews\nPlans starting at\n$40\n\n/mo\n\nSpeeds up to\n2000 Mbps\nContract length\nNone\nConnection type\nCable\n5-Year Price Guarantee\nView details\nCall to learn more:\n(855) 683-4074\nCheck plans with Xfinity\n\nStarlink ",
+      "features": [
+        "Speeds up to"
+      ],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Internet\n\n\n130",
+      "price": "$55",
+      "speed": "400 Mbps",
+      "description": "Internet\n\n\n130 customer reviews\nPlans starting at\n$55\n\n/mo*\n\nfor 12 mos.\nSpeeds up to\n400 Mbps\nContract length\nNone\nConnection type\nSatellite\n\n*Users on Residential 100 Mbps and Residential 200 Mbps will be limited to download speeds of 100 Mbps and 200 Mbps respectively. Residential 100 Mbps and Residential 200 Mbps plans are only available in select areas. Residential Max users will experience maximum available speeds and top Residential network priority.\n\nView details\nCall to learn more:\n(877) 291-8843\nCheck plans with Starlink\n\nVerizon 5G ",
+      "features": [
+        "Speeds up to"
+      ],
+      "broadband_facts": ""
+    },
+    {
+      "name": "Internet\n\n\n484",
+      "price": "$60",
+      "speed": "300 Mbps",
+      "description": "Internet\n\n\n484 customer reviews\nPlans starting at\n$60\n\n/mo*\n\nfor 12 mos.\nSpeeds up to\n300 Mbps\nContract length\nNone\nConnection type\nWireless\nSpecial promotion\n\n* Plans start at $35/mo. when combined with postpaid Verizon mobile phone plan (excludes business and data-only plans)\n\nView details\nCall to learn more:\n(833) 237-8881\nCheck plans with Verizon\n\n1-5 of 5 providers shown\n\n30+ leading brands to shop\n\nShop plans from the top internet and TV providers like AT&T, Xfinity, Verizon and more.\n\nOne place to research and order\n\nUse our patented technology to search providers, compare plans and order service all on our secure site.\n\n20+ years of experience\n\nOver 20 years and 100+ experts dedicated to helping you find what you need.\n\nGive us a call.\nWe’ll get you taken care of.\n\nWhether you know what you want or need a little advice, we’ll help you find your ideal plan and order your service over the phone.\n\nCall now:\n(855) 692-2472\n\nMonday – Friday\n\n8:00 a.m. to 10:00 p.m. EST\n\nSaturday\n\n8:00 a.m. to 9:00 p.m. EST\n\nSunday\n\n9:00 a.m. to 7:00 p.m. EST\n\nOur customers say\n\nResultsCompare providers near you\nLast updated: Jan 27, 2026\n\n\nNeed help finding internet & TV providers near you?\nGive our experts a call:\n(855) 692-2472\nMonday — Friday\n8:00 a.m. to 10:00 p.m. EST\nSaturday\n9:00 a.m. to 7:00 p.m. EST\nSunday\n10:00 a.m. to 7:00 p.m. EST\n\nInternet & TV\n\nInternet in my area\nCheap internet\nFiber internet\nSatellite ",
+      "features": [
+        "Speeds up to",
+        "* Plans start at $35/mo. when combined with postpaid Verizon mobile phone plan (excludes business and data-only plans)"
+      ],
+      "broadband_facts": ""
+    }
+  ],
+  "raw_api_responses": {}
+}

@@ -1,0 +1,127 @@
+{
+  "last_updated": "2026-09-21T00:40:29.323731",
+  "total": 11,
+  "results": [
+    {
+      "address": "25 Crestwood Dr, West Haven, CT 06516",
+      "state": "CT",
+      "market": "New Haven area - core Frontier fiber",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:42:53.138883"
+    },
+    {
+      "address": "42 Maple Ave, Wallingford, CT 06492",
+      "state": "CT",
+      "market": "CT - known fiber town",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:44:35.853785"
+    },
+    {
+      "address": "18 Oak Hill Rd, Southbury, CT 06488",
+      "state": "CT",
+      "market": "CT - confirmed fiber",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:46:35.337405"
+    },
+    {
+      "address": "310 Lakewood Rd, Waterbury, CT 06704",
+      "state": "CT",
+      "market": "CT - Frontier territory",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:49:02.985886"
+    },
+    {
+      "address": "7 Birch Ln, Shelton, CT 06484",
+      "state": "CT",
+      "market": "CT - residential fiber",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:51:21.160908"
+    },
+    {
+      "address": "1522 Ridgewood Dr, Garland, TX 75041",
+      "state": "TX",
+      "market": "DFW suburb - Frontier fiber rollout",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:53:12.940294"
+    },
+    {
+      "address": "3209 Darvany Dr, Dallas, TX 75220",
+      "state": "TX",
+      "market": "Dallas residential",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:55:41.655200"
+    },
+    {
+      "address": "4215 Avondale Ave, Dallas, TX 75219",
+      "state": "TX",
+      "market": "Dallas residential",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-20T23:58:11.690389"
+    },
+    {
+      "address": "125 Pinnacle Pkwy, Covington, WA 98042",
+      "state": "WA",
+      "market": "WA - Frontier/Ziply transition area",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=4d022411-aa47-43d3-b746-ffd6113ee3eb",
+      "last_checked": "2026-09-21T00:00:20.478442"
+    },
+    {
+      "address": "8120 Citrus Park Dr, Tampa, FL 33625",
+      "state": "FL",
+      "market": "Tampa suburb - Frontier fiber expansion",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Plans did not load after address submission",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-21T00:02:06.604987"
+    },
+    {
+      "address": "1308 Chase St, Novato, CA 94945",
+      "state": "CA",
+      "market": "Novato",
+      "scope": "PROSPECT_CUSTOMER",
+      "reason": "Address is serviceable \u2014 Frontier asked 'Are you moving to this address?' (clicked=clicked_yes_moving); prospect / new-customer path",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "last_checked": "2026-09-21T00:40:29.323669"
+    }
+  ]
+}

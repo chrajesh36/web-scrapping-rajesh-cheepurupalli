@@ -1,0 +1,456 @@
+{
+  "timestamp": "2026-09-20T23:13:47.468844",
+  "total_addresses": 50,
+  "results": [
+    {
+      "address": "1425 Oates Dr, Mesquite, TX 75150",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=0f39f0e2-e136-4cb5-a01b-fbf029525740",
+      "elapsed_s": 25.6
+    },
+    {
+      "address": "305 S Broadway, Tyler, TX 75702",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=a6550ced-30e2-4cba-ae06-1bd2b43a59e9",
+      "elapsed_s": 22.2
+    },
+    {
+      "address": "4810 Ave H, Austin, TX 78751",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=e1ef338a-d58b-4393-9fee-cf0f7b91bfd8",
+      "elapsed_s": 20.7
+    },
+    {
+      "address": "2115 Main St, Houston, TX 77002",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=88bbecc3-8334-4915-a1a8-79af4eba3119",
+      "elapsed_s": 21.1
+    },
+    {
+      "address": "500 Dolorosa St, San Antonio, TX 78204",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=962f2285-b5d2-4e79-b1ca-4decc5c1a4b7",
+      "elapsed_s": 24.5
+    },
+    {
+      "address": "3410 E 1st St, Long Beach, CA 90803",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Address entry page — plans did not load",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963361969",
+      "elapsed_s": 23.7
+    },
+    {
+      "address": "112 S Lemon Ave, Walnut, CA 91789",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963387175",
+      "elapsed_s": 22.1
+    },
+    {
+      "address": "905 S Main St, Santa Ana, CA 92701",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963410931",
+      "elapsed_s": 20.4
+    },
+    {
+      "address": "1020 15th St, Sacramento, CA 95814",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963432362",
+      "elapsed_s": 22.5
+    },
+    {
+      "address": "145 S Brand Blvd, Glendale, CA 91204",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963457356",
+      "elapsed_s": 22.5
+    },
+    {
+      "address": "185 Church St, New Haven, CT 06510",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963481886",
+      "elapsed_s": 22.5
+    },
+    {
+      "address": "55 Elizabeth St, Hartford, CT 06105",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963505801",
+      "elapsed_s": 21.9
+    },
+    {
+      "address": "21 Bank St, Stamford, CT 06901",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error (possibly commercial address)",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/?_cb=1789963529639",
+      "elapsed_s": 21.4
+    },
+    {
+      "address": "150 Main St, Bridgeport, CT 06604",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy/unserviceable-allconnect/?secure_address_token=1e264b3c-0789-4af4-a603-7abfefc54db4",
+      "elapsed_s": 22.2
+    },
+    {
+      "address": "99 Broad St, Milford, CT 06460",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.3
+    },
+    {
+      "address": "250 E Broad St, Rochester, NY 14604",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.2
+    },
+    {
+      "address": "120 Delaware Ave, Buffalo, NY 14202",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.6
+    },
+    {
+      "address": "130 S Cayuga St, Ithaca, NY 14850",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.4
+    },
+    {
+      "address": "210 N Tioga St, Ithaca, NY 14850",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.4
+    },
+    {
+      "address": "55 Main St, Yonkers, NY 10701",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.1
+    },
+    {
+      "address": "4205 W Spruce St, Tampa, FL 33607",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.7
+    },
+    {
+      "address": "302 N Howard Ave, Tampa, FL 33606",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.0
+    },
+    {
+      "address": "1025 E Robinson St, Orlando, FL 32801",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.7
+    },
+    {
+      "address": "220 Gulf Blvd, Indian Rocks Beach, FL 33785",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.7
+    },
+    {
+      "address": "415 1st Ave N, St Petersburg, FL 33701",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.4
+    },
+    {
+      "address": "15 E Ohio St, Indianapolis, IN 46204",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.6
+    },
+    {
+      "address": "210 E Berry St, Fort Wayne, IN 46802",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.9
+    },
+    {
+      "address": "505 Wabash Ave, Terre Haute, IN 47807",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.3
+    },
+    {
+      "address": "425 Walnut St, Cincinnati, OH 45202",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.1
+    },
+    {
+      "address": "2030 Euclid Ave, Cleveland, OH 44115",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.9
+    },
+    {
+      "address": "88 E Broad St, Columbus, OH 43215",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.4
+    },
+    {
+      "address": "1016 Penn Ave, Pittsburgh, PA 15222",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.9
+    },
+    {
+      "address": "18 N 3rd St, Easton, PA 18042",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.9
+    },
+    {
+      "address": "20 S Hanover St, Carlisle, PA 17013",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.5
+    },
+    {
+      "address": "406 Capitol St, Charleston, WV 25301",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.1
+    },
+    {
+      "address": "800 3rd Ave, Huntington, WV 25701",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.5
+    },
+    {
+      "address": "110 E Main St, Urbana, IL 61801",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.5
+    },
+    {
+      "address": "214 N Wyman St, Rockford, IL 61101",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.7
+    },
+    {
+      "address": "400 S Virginia St, Reno, NV 89501",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.4
+    },
+    {
+      "address": "150 S 1st St, San Jose, CA 95113",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.9
+    },
+    {
+      "address": "320 E 4th St, Charlotte, NC 28202",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.3
+    },
+    {
+      "address": "140 Church St, Burlington, VT 05401",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.3
+    },
+    {
+      "address": "215 N Main St, Greenville, SC 29601",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.4
+    },
+    {
+      "address": "311 Broad St, Chattanooga, TN 37402",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.8
+    },
+    {
+      "address": "125 S State St, Salt Lake City, UT 84111",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.3
+    },
+    {
+      "address": "2101 Wilson Blvd, Arlington, VA 22201",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.3
+    },
+    {
+      "address": "500 2nd Ave, Des Moines, IA 50309",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.1
+    },
+    {
+      "address": "250 Nicollet Mall, Minneapolis, MN 55401",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 10.3
+    },
+    {
+      "address": "205 5th Ave S, La Crosse, WI 54601",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.3
+    },
+    {
+      "address": "100 E Capitol Dr, Milwaukee, WI 53212",
+      "scope": "INVALID_ADDRESS",
+      "reason": "Address field not found on page",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "",
+      "elapsed_s": 11.7
+    }
+  ]
+}

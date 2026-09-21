@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "address": "25 Crestwood Dr, West Haven, CT 06516",
+      "state": "CT",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 63.953344106674194
+    },
+    {
+      "address": "42 Maple Ave, Wallingford, CT 06492",
+      "state": "CT",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 68.87436413764954
+    },
+    {
+      "address": "18 Oak Hill Rd, Southbury, CT 06488",
+      "state": "CT",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 74.7109887599945
+    },
+    {
+      "address": "310 Lakewood Rd, Waterbury, CT 06704",
+      "state": "CT",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 74.71264624595642
+    },
+    {
+      "address": "7 Birch Ln, Shelton, CT 06484",
+      "state": "CT",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 70.95485496520996
+    },
+    {
+      "address": "1522 Ridgewood Dr, Garland, TX 75041",
+      "state": "TX",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 71.47936511039734
+    },
+    {
+      "address": "3209 Darvany Dr, Dallas, TX 75220",
+      "state": "TX",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 75.88233804702759
+    },
+    {
+      "address": "4215 Avondale Ave, Dallas, TX 75219",
+      "state": "TX",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Technical difficulties error",
+      "elapsed_s": 75.88321208953857
+    },
+    {
+      "address": "125 Pinnacle Pkwy, Covington, WA 98042",
+      "state": "WA",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "No pricing or plans detected",
+      "elapsed_s": 65.4704692363739
+    },
+    {
+      "address": "8120 Citrus Park Dr, Tampa, FL 33625",
+      "state": "FL",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "reason": "Plans did not load after address submission",
+      "elapsed_s": 67.97245192527771
+    }
+  ]
+}
