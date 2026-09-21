@@ -626,6 +626,8 @@ async def extract(address: str, proxy: str | None = None) -> ExtractionResult:
         print(f"\nPhase 3: Entering address: {address}")
         address_field = None
         for sel in [
+            "#street-address",
+            "input.address-form__input",
             "input[aria-label*='Street Address']",
             "input[placeholder*='Enter your address']",
             "input[aria-label*='address']",

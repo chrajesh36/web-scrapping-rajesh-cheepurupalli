@@ -30,8 +30,10 @@ from behavior import (
     async_bezier_mouse_move,
     async_lognormal_type,
 )
+from frontier_level6_stealth_max import get_abck_flag, rich_warmup
 
 FRONTIER_BUY = "https://frontier.com/buy"
+FRONTIER_SHOP = "https://frontier.com/shop/internet"
 WARMUP_URL = "https://frontier.com/why-frontier"
 # Surface I/O paths only (repo move into legacy/) — crawl logic unchanged
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -138,7 +140,15 @@ async def dismiss_banner(tab) -> None:
 
 async def check_address(address: str, state: str, market: str,
                         proxy: str | None = None) -> AddressResult:
-    """Check one address using a fresh browser session."""
+    """Check one address using a fresh browser session.
+
+    Full L6 evasion stack (all directions):
+      1. TLS — nodriver + system Chrome
+      2. IP — optional --proxy residential
+      3. Sensor — multi-page warmup + _abck patience before CHECK
+      4. Behavior — rich_warmup + log-normal typing + Bezier-ready helpers
+      5. Session — fresh profile per address; why-frontier → shop → buy
+    """
     start = time.time()
     result = AddressResult(address=address, state=state, market=market,
                            scope="UNKNOWN", reason="")
@@ -148,6 +158,7 @@ async def check_address(address: str, state: str, market: str,
     if proxy:
         browser_args.append(f"--proxy-server={proxy}")
 
+    browser = None
     try:
         browser = await uc.start(
             headless=False,
@@ -155,31 +166,42 @@ async def check_address(address: str, state: str, market: str,
             browser_args=browser_args or None,
         )
 
-        # Phase 1: Warm-up on non-protected page
+        # Layer 5 session + Layer 3/4: multi-page warm-up (L6)
+        print("    L6 Phase 1: why-frontier warmup")
         tab = await browser.get(WARMUP_URL)
         await asyncio.sleep(random.uniform(3.0, 5.0))
         await dismiss_banner(tab)
-        await warmup(tab, duration_s=random.uniform(15.0, 25.0))
+        await rich_warmup(tab, duration_s=25.0)
+        print(f"    _abck after why-frontier: {await get_abck_flag(tab)}")
 
-        # Phase 2: Navigate to /buy and warm-up
+        print("    L6 Phase 2: shop/internet warmup")
+        await tab.get(FRONTIER_SHOP)
+        await asyncio.sleep(random.uniform(3.0, 5.0))
+        await dismiss_banner(tab)
+        await rich_warmup(tab, duration_s=25.0)
+        print(f"    _abck after shop: {await get_abck_flag(tab)}")
+
+        print("    L6 Phase 3: /buy + sensor patience")
         await tab.get(FRONTIER_BUY)
         await asyncio.sleep(random.uniform(3.0, 5.0))
         await dismiss_banner(tab)
         await tab.evaluate("window.scrollTo(0, 0)")
-        await asyncio.sleep(0.5)
-        await warmup(tab, duration_s=random.uniform(10.0, 15.0))
+        for i in range(12):
+            flag = await get_abck_flag(tab)
+            if flag == "0":
+                print(f"    _abck validated (0) before CHECK at wait {i+1}")
+                break
+            await asyncio.sleep(2)
+        else:
+            print(f"    _abck still {await get_abck_flag(tab)} — proceeding carefully")
 
-        # Scroll back to top for address input
-        await tab.evaluate("window.scrollTo(0, 0)")
-        await asyncio.sleep(1)
-
-        # Phase 3: Find and fill address
+        # Address field
         field = await tab.query_selector("#street-address")
         if not field:
             field = await tab.query_selector("input.address-form__input")
         if not field:
             result.scope = "INVALID_ADDRESS"
-            result.reason = "Address field not found"
+            result.reason = "Address field not found (soft-block / bot score)"
             browser.stop()
             return result
 
@@ -201,28 +223,31 @@ async def check_address(address: str, state: str, market: str,
         await field.click()
         await asyncio.sleep(0.3)
 
-        # Type address with natural cadence
         await async_lognormal_type(tab, field, address)
         await asyncio.sleep(random.uniform(1.5, 3.0))
 
-        # Select first autocomplete option
-        try:
-            opts = await tab.query_selector_all("[role='option']")
-            if opts:
-                await asyncio.sleep(random.uniform(0.3, 0.8))
-                await opts[0].click()
-            else:
-                city = address.split(",")[1].strip().split()[0] if "," in address else ""
-                if city:
-                    opt = await tab.find(city, timeout=3)
-                    if opt:
-                        await opt.click()
-        except Exception:
-            pass
-
+        # Autocomplete — prefer options matching address tokens
+        needles = [
+            t for t in re.split(r"[,\s]+", address.lower())
+            if (len(t) > 2 and not t.isdigit()) or (t.isdigit() and len(t) == 5)
+        ][:5]
+        picked = await tab.evaluate("""
+            (needles) => {
+                const opts = [...document.querySelectorAll('[role="option"], li, button')];
+                for (const o of opts) {
+                    const t = (o.innerText || '').toLowerCase();
+                    if (needles.some(n => t.includes(n)) && t.length > 5 && t.length < 200) {
+                        o.click(); return t.substring(0, 120);
+                    }
+                }
+                const first = document.querySelector('[role="option"]');
+                if (first) { first.click(); return (first.innerText || '').substring(0, 120); }
+                return '';
+            }
+        """, needles)
+        print(f"    autocomplete: {picked!r}")
         await asyncio.sleep(random.uniform(0.5, 1.5))
 
-        # Click CHECK AVAILABILITY via JS
         clicked = await tab.evaluate("""
             (() => {
                 const btns = document.querySelectorAll('button');
@@ -240,41 +265,58 @@ async def check_address(address: str, state: str, market: str,
             browser.stop()
             return result
 
-        # Wait for result
-        await asyncio.sleep(random.uniform(6.0, 10.0))
+        # Wait for plans / mover / soft errors (mover can be below fold)
+        mover_seen = False
+        page_text = ""
+        for _ in range(16):
+            await asyncio.sleep(2.5)
+            page_text = await tab.evaluate("document.body.innerText") or ""
+            if not isinstance(page_text, str):
+                page_text = str(page_text)
+            page_lower = page_text.lower()
+            if "are you moving to this address" in page_lower and not mover_seen:
+                mover_seen = True
+                await tab.evaluate("""
+                    (() => {
+                        for (const b of document.querySelectorAll('button, a, [role="button"]')) {
+                            const t = (b.innerText || '').replace(/\\s+/g, ' ').trim().toUpperCase();
+                            if (t.includes('YES') && t.includes('MOVING') && !t.includes('NOT')) {
+                                b.click(); return true;
+                            }
+                        }
+                        return false;
+                    })()
+                """)
+                print("    mover modal → clicked YES, I'M MOVING (prospect path)")
+                await asyncio.sleep(8)
+                page_text = await tab.evaluate("document.body.innerText") or ""
+                if not isinstance(page_text, str):
+                    page_text = str(page_text)
+                continue
+            if any(k in page_lower for k in ("view plan", "/mo", "add to cart", "allconnect.com")):
+                break
+            await tab.scroll_down(200)
 
-        # Phase 4: Determine scope
         final_url = await tab.evaluate("location.href") or ""
         result.final_url = final_url
+        page_lower = (page_text or "").lower()
 
         if "allconnect.com" in final_url:
             result.scope = "PROVIDER_NOT_AVAILABLE"
             result.reason = "Redirected to allconnect.com — Frontier not available"
 
         elif "frontier.com" in final_url:
-            page_text = await tab.evaluate("document.body.innerText") or ""
-            if not isinstance(page_text, str):
-                page_text = str(page_text)
-
             has_pricing = bool(re.search(r'\$\d+', page_text))
-            has_plans = any(kw in page_text.lower() for kw in [
+            has_plans = any(kw in page_lower for kw in [
                 "view plan", "add to cart", "shop now", "/mo", "per mo"
             ])
-            page_lower = page_text.lower()
 
-            if "technical difficulties" in page_lower:
-                result.scope = "PROVIDER_NOT_AVAILABLE"
-                result.reason = "Technical difficulties error"
-            elif "already a frontier customer" in page_lower or "current customer" in page_lower:
+            if "already a frontier customer" in page_lower or "current customer" in page_lower:
                 result.scope = "CURRENT_CUSTOMER"
                 result.reason = "Existing customer detected"
-            elif "isn't available" in page_lower or "not available at your address" in page_lower:
-                result.scope = "PROVIDER_NOT_AVAILABLE"
-                result.reason = "Frontier not available at this address"
             elif has_pricing and has_plans:
                 result.scope = "PROSPECT_CUSTOMER"
                 result.reason = "Plans with pricing found"
-                # Extract plan names
                 try:
                     plans_raw = await tab.evaluate("""
                         JSON.stringify((() => {
@@ -290,6 +332,18 @@ async def check_address(address: str, state: str, market: str,
                     result.num_offers = len(result.offer_names) or 1
                 except Exception:
                     pass
+            elif mover_seen or "are you moving" in page_lower:
+                result.scope = "PROSPECT_CUSTOMER"
+                result.reason = "Serviceable — mover question shown (prospect path)"
+            elif "isn't available" in page_lower or "not available at your address" in page_lower:
+                result.scope = "PROVIDER_NOT_AVAILABLE"
+                result.reason = "Frontier not available at this address"
+            elif "technical difficulties" in page_lower:
+                result.scope = "PROVIDER_NOT_AVAILABLE"
+                result.reason = (
+                    "Technical difficulties soft-block "
+                    "(often IP reputation / order API — try residential proxy)"
+                )
             elif "enter your address" in page_lower and not has_pricing:
                 result.scope = "PROVIDER_NOT_AVAILABLE"
                 result.reason = "Plans did not load after address submission"
@@ -306,7 +360,8 @@ async def check_address(address: str, state: str, market: str,
         result.scope = "INVALID_ADDRESS"
         result.reason = f"Error: {str(exc)[:80]}"
         try:
-            browser.stop()
+            if browser:
+                browser.stop()
         except Exception:
             pass
 

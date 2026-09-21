@@ -32,24 +32,24 @@ python -m playwright install chromium
 pytest tracer/test -q
 ```
 
-## Live crawl (bot detection unchanged)
+## Live crawl (bot detection unchanged — all 5 layers)
 
 **Do not use Playwright for live Frontier checks in this repo.**
 
-`crawler/run_addresses.py` is a thin I/O wrapper only. It calls:
+`crawler/run_addresses.py` and `dca_frontier.crawl` call:
 
-`legacy/frontier_batch_stealth.check_address` (nodriver L6 — same evasion as before).
+`legacy/frontier_batch_stealth.check_address` (nodriver L6).
 
-`dca_frontier/` seeds / decoder / offer_extractor and the Frontier healer exist for
-**deadshot package shape** and config. They do not replace the L6 crawl path here.
+See `docs/BOT_EVASION.md` for the five-layer stack and entry-point map.
 
 ```bash
 # 3 addresses via legacy nodriver L6
 python crawler/run_addresses.py --provider frontier --max 3
 
-# one address
+# one address (+ optional residential proxy)
 python crawler/run_addresses.py --provider frontier \
-  --address "1308 Chase St, Novato, CA 94945"
+  --address "1308 Chase St, Novato, CA 94945" \
+  --proxy "http://user:pass@host:port"
 ```
 
 
