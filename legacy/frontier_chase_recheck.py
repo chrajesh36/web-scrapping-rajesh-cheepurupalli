@@ -31,7 +31,9 @@ ADDRESS = "1308 Chase St, Novato, CA 94945"
 SHOP = "https://frontier.com/shop/internet"
 BUY = "https://frontier.com/buy"
 WARMUP = "https://frontier.com/why-frontier"
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "frontier")
+OUT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs", "frontier"
+)
 
 
 async def dismiss(tab):
@@ -391,7 +393,12 @@ async def main(proxy: str | None = None):
             "snapshot": snap,
             "checked": datetime.now().isoformat(),
         }, f, indent=2)
-    scopes_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontier_address_scopes.json")
+    scopes_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "crawler",
+        "dca_frontier",
+        "frontier_address_scopes.json",
+    )
     existing = {}
     if os.path.exists(scopes_path):
         with open(scopes_path) as f:

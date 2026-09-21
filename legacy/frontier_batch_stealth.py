@@ -33,10 +33,16 @@ from behavior import (
 
 FRONTIER_BUY = "https://frontier.com/buy"
 WARMUP_URL = "https://frontier.com/why-frontier"
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOGS_DIR = os.path.join(BASE_DIR, "logs", "frontier")
-ADDRESSES_FILE = os.path.join(BASE_DIR, "frontier_addresses.json")
-RESULTS_FILE = os.path.join(BASE_DIR, "frontier_address_scopes.json")
+# Surface I/O paths only (repo move into legacy/) — crawl logic unchanged
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = _REPO_ROOT
+LOGS_DIR = os.path.join(_REPO_ROOT, "logs", "frontier")
+ADDRESSES_FILE = os.path.join(
+    _REPO_ROOT, "crawler", "dca_frontier", "frontier_addresses.json"
+)
+RESULTS_FILE = os.path.join(
+    _REPO_ROOT, "crawler", "dca_frontier", "frontier_address_scopes.json"
+)
 
 
 @dataclass

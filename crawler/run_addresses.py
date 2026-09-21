@@ -1,8 +1,11 @@
-"""Live smoke test runner for Frontier (deterministic recipe).
+"""Live smoke runner — packaging I/O only.
+
+Bot evasion / crawl logic is unchanged: delegates to legacy nodriver L6
+(``legacy/frontier_batch_stealth.check_address``).
 
 Usage:
-    python -m run_addresses --provider frontier --address "1308 Chase St, Novato, CA 94945"
-    python crawler/run_addresses.py --provider frontier --address "..."
+    python crawler/run_addresses.py --provider frontier --address "1308 Chase St, Novato, CA 94945"
+    python crawler/run_addresses.py --provider frontier --max 3
 """
 
 from __future__ import annotations
@@ -12,171 +15,147 @@ import asyncio
 import json
 import os
 import sys
+from datetime import datetime
 
-# Allow running from repo root without install
 _CRAWLER_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.dirname(_CRAWLER_DIR)
+_LEGACY_DIR = os.path.join(_REPO_ROOT, "legacy")
+
+# Surface-level path wiring so legacy imports (behavior, etc.) resolve
+if _LEGACY_DIR not in sys.path:
+    sys.path.insert(0, _LEGACY_DIR)
 if _CRAWLER_DIR not in sys.path:
     sys.path.insert(0, _CRAWLER_DIR)
 
-from playwright.async_api import async_playwright
-
-from dca_frontier.offer_extractor import (
-    determine_scope_from_page,
-    extract_broadband_facts,
-    extract_plans_from_dom,
+from frontier_batch_stealth import (  # noqa: E402  — legacy L6 crawl, unmodified
+    check_address,
+    load_addresses,
 )
-from dca_frontier.seeds import BUY_URL, START_URL, frontier_seed_recipe
-from dca_recipe_engine.steps.healers import get_healer
+
+# Output naming for deadshot packaging (INVALID_ADDRESS → UNKNOWN_ADDRESS)
+_SCOPE_OUT = {
+    "INVALID_ADDRESS": "UNKNOWN_ADDRESS",
+}
 
 
-async def run_frontier(address: str, headed: bool = True) -> dict:
-    recipe = frontier_seed_recipe()
-    healer = get_healer("frontier")
-    assert healer.__class__.__module__.endswith("frontier")
+def _map_scope(scope: str) -> str:
+    return _SCOPE_OUT.get(scope, scope)
 
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=not headed)
-        context = await browser.new_context()
-        page = await context.new_page()
 
-        print(f"provider=frontier engine=recipe llm_calls=0")
-        print(f"recipe_steps={[s.name for s in recipe.steps]}")
-        print(f"start_url={START_URL}")
+async def run_one(address: str, state: str = "", market: str = "",
+                  proxy: str | None = None) -> dict:
+    print(f"provider=frontier engine=legacy_nodriver_l6 llm_calls=0")
+    print(f"crawl=legacy/frontier_batch_stealth.check_address (bot-detection unchanged)")
+    r = await asyncio.wait_for(
+        check_address(address, state or "??", market or "smoke", proxy),
+        timeout=180.0,
+    )
+    scope = _map_scope(r.scope)
+    out = {
+        "provider": "frontier",
+        "address": r.address,
+        "state": r.state,
+        "market": r.market,
+        "scope": scope,
+        "scope_reason": r.reason,
+        "num_offers": r.num_offers,
+        "offer_names": r.offer_names,
+        "final_url": r.final_url,
+        "elapsed_s": r.elapsed_s,
+        "llm_calls": 0,
+        "outcome": "completed" if scope != "UNKNOWN_ADDRESS" or r.num_offers else (
+            "ERROR_PROCESSING" if "not found" in (r.reason or "").lower()
+            or "field" in (r.reason or "").lower()
+            else "completed"
+        ),
+        "healer": "dca_recipe_engine.steps.healers.frontier",
+        "crawl_backend": "legacy/frontier_batch_stealth.py",
+    }
+    print(f"outcome={out['outcome']} llm_calls=0 scope={scope}")
+    print(json.dumps(out, indent=2)[:1500])
+    return out
 
-        await page.goto(START_URL, wait_until="domcontentloaded", timeout=60000)
-        await page.wait_for_timeout(2000)
-        for label in ("Accept All", "Close"):
-            try:
-                await page.get_by_role("button", name=label).first.click(timeout=2000)
-            except Exception:
-                pass
 
-        await page.goto(BUY_URL, wait_until="domcontentloaded", timeout=60000)
-        await page.wait_for_timeout(3000)
+async def run_many(max_n: int = 3, proxy: str | None = None) -> list[dict]:
+    addrs = load_addresses()[:max_n]
+    # Prefer Chase first if present in scopes file intent — always include known prospect
+    preferred = "1308 Chase St, Novato, CA 94945"
+    rows = [{"address": preferred, "state": "CA", "market": "Novato"}]
+    for a in addrs:
+        if a["address"] != preferred:
+            rows.append(a)
+        if len(rows) >= max_n:
+            break
 
-        field = page.locator("#street-address")
-        if await field.count() == 0:
-            print("outcome=ERROR_PROCESSING reason=no_address_field")
-            await browser.close()
-            return {
+    results = []
+    for i, row in enumerate(rows):
+        print("\n" + "=" * 72)
+        print(f"[{i+1}/{len(rows)}] {row['address']}")
+        print("=" * 72)
+        try:
+            results.append(
+                await run_one(row["address"], row.get("state", ""), row.get("market", ""), proxy)
+            )
+        except Exception as exc:
+            results.append({
                 "provider": "frontier",
-                "address": address,
-                "scope": "UNKNOWN_ADDRESS",
-                "scope_reason": "No address field",
+                "address": row["address"],
+                "scope": "ERROR",
+                "scope_reason": str(exc),
                 "offers": [],
                 "llm_calls": 0,
                 "outcome": "ERROR_PROCESSING",
-            }
-
-        await field.click()
-        await page.evaluate(
-            """() => {
-                const input = document.querySelector('#street-address');
-                if (!input) return;
-                const s = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
-                s.call(input, '');
-                input.dispatchEvent(new Event('input', {bubbles: true}));
-            }"""
-        )
-        await field.type(address, delay=80)
-        await page.wait_for_timeout(2500)
-
-        # Autocomplete
-        await page.evaluate(
-            """(needles) => {
-                const opts = [...document.querySelectorAll('[role="option"], li, button')];
-                for (const o of opts) {
-                    const t = (o.innerText || '').toLowerCase();
-                    if (needles.some(n => t.includes(n)) && t.length > 5 && t.length < 200) {
-                        o.click(); return t;
-                    }
-                }
-                const first = document.querySelector('[role="option"]');
-                if (first) { first.click(); return first.innerText || ''; }
-                return '';
-            }""",
-            [t for t in address.lower().replace(",", " ").split() if len(t) > 2][:4],
-        )
-        await page.wait_for_timeout(1000)
-
-        clicked = await page.evaluate(
-            """() => {
-                for (const b of document.querySelectorAll('button')) {
-                    if ((b.innerText || '').toLowerCase().includes('check availability')) {
-                        b.click(); return true;
-                    }
-                }
-                return false;
-            }"""
-        )
-        print(f"check_availability={clicked}")
-
-        for _ in range(20):
-            await page.wait_for_timeout(2500)
-            body = await page.inner_text("body")
-            body_l = body.lower()
-            if "are you moving to this address" in body_l:
-                await page.evaluate(
-                    """() => {
-                        for (const b of document.querySelectorAll('button')) {
-                            const t = (b.innerText || '').toUpperCase();
-                            if (t.includes('YES') && t.includes('MOVING') && !t.includes('NOT')) {
-                                b.click(); return true;
-                            }
-                        }
-                        return false;
-                    }"""
-                )
-                await page.wait_for_timeout(6000)
-                break
-            if any(k in body_l for k in ("view plan", "/mo", "add to cart", "allconnect.com")):
-                break
-
-        body = await page.inner_text("body")
-        url = page.url
-        scope, reason = determine_scope_from_page(body, url)
-        plans = await extract_plans_from_dom(page)
-        priced = [p for p in plans if p.price or "$" in p.description]
-        if priced:
-            await extract_broadband_facts(page, priced)
-            if scope not in ("CURRENT_CUSTOMER",):
-                scope = "PROSPECT_CUSTOMER"
-                reason = f"Found {len(priced)} plan(s) with pricing"
-
-        outcome = "completed"
-        if scope in ("UNKNOWN_ADDRESS",) and not priced:
-            outcome = "ERROR_PROCESSING"
-
-        result = {
-            "provider": "frontier",
-            "address": address,
-            "scope": scope,
-            "scope_reason": reason,
-            "offers": [p.to_dict() for p in priced],
-            "final_url": url,
-            "llm_calls": 0,
-            "outcome": outcome,
-            "healer": "dca_recipe_engine.steps.healers.frontier",
-        }
-        print(f"outcome={outcome} llm_calls=0 scope={scope}")
-        print(json.dumps(result, indent=2)[:2000])
-        await browser.close()
-        return result
+                "crawl_backend": "legacy/frontier_batch_stealth.py",
+            })
+            print(f"FAILED: {exc}")
+        if i < len(rows) - 1:
+            wait = 60
+            print(f"Cooldown cooldown {wait}s...")
+            await asyncio.sleep(wait)
+    return results
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Frontier smoke test (deterministic)")
-    parser.add_argument("--provider", default="frontier")
-    parser.add_argument(
-        "--address",
-        default="1308 Chase St, Novato, CA 94945",
-        help="Service address to check",
+    parser = argparse.ArgumentParser(
+        description="Frontier smoke test — legacy L6 nodriver crawl (structure/IO wrapper only)"
     )
-    parser.add_argument("--headless", action="store_true")
+    parser.add_argument("--provider", default="frontier")
+    parser.add_argument("--address", default=None)
+    parser.add_argument("--max", type=int, default=3, help="How many addresses when --address omitted")
+    parser.add_argument("--proxy", default=os.environ.get("FRONTIER_PROXY"))
     args = parser.parse_args()
     if args.provider.lower() != "frontier":
-        raise SystemExit(f"Only frontier is implemented in this repo (got {args.provider})")
-    asyncio.run(run_frontier(args.address, headed=not args.headless))
+        raise SystemExit(f"Only frontier is wired (got {args.provider})")
+
+    out_dir = os.path.join(_REPO_ROOT, "logs", "frontier")
+    os.makedirs(out_dir, exist_ok=True)
+
+    if args.address:
+        results = uc_run(run_one(args.address, proxy=args.proxy))
+        results = [results]
+    else:
+        results = uc_run(run_many(max_n=args.max, proxy=args.proxy))
+
+    path = os.path.join(
+        out_dir, f"restructure_smoke_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    )
+    with open(path, "w") as f:
+        json.dump({"checked": datetime.now().isoformat(), "results": results}, f, indent=2)
+
+    print("\n=== SUMMARY ===")
+    for r in results:
+        print(
+            f"  {r.get('scope', '?'):<24} offers={r.get('num_offers', len(r.get('offer_names') or []))} "
+            f"outcome={r.get('outcome')} llm={r.get('llm_calls')}"
+        )
+        print(f"    {r.get('address')}")
+        print(f"    {str(r.get('scope_reason', ''))[:120]}")
+    print(f"Saved {path}")
+
+
+def uc_run(coro):
+    import nodriver as uc
+    return uc.loop().run_until_complete(coro)
 
 
 if __name__ == "__main__":

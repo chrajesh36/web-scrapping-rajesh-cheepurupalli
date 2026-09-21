@@ -36,7 +36,9 @@ from behavior import (
 
 FRONTIER_URL = "https://frontier.com/shop/internet"
 WARMUP_URL = "https://frontier.com/why-frontier"
-LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "frontier")
+LOGS_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs", "frontier"
+)
 
 
 # ── Data models ──────────────────────────────────────────────────────────

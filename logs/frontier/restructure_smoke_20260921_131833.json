@@ -1,0 +1,53 @@
+{
+  "checked": "2026-09-21T13:18:33.408458",
+  "results": [
+    {
+      "provider": "frontier",
+      "address": "1308 Chase St, Novato, CA 94945",
+      "state": "CA",
+      "market": "Novato",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "scope_reason": "Plans did not load after address submission",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 67.60680389404297,
+      "llm_calls": 0,
+      "outcome": "completed",
+      "healer": "dca_recipe_engine.steps.healers.frontier",
+      "crawl_backend": "legacy/frontier_batch_stealth.py"
+    },
+    {
+      "provider": "frontier",
+      "address": "25 Crestwood Dr, West Haven, CT 06516",
+      "state": "CT",
+      "market": "New Haven area - core Frontier fiber",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "scope_reason": "Plans did not load after address submission",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 73.80311822891235,
+      "llm_calls": 0,
+      "outcome": "completed",
+      "healer": "dca_recipe_engine.steps.healers.frontier",
+      "crawl_backend": "legacy/frontier_batch_stealth.py"
+    },
+    {
+      "provider": "frontier",
+      "address": "42 Maple Ave, Wallingford, CT 06492",
+      "state": "CT",
+      "market": "CT - known fiber town",
+      "scope": "PROVIDER_NOT_AVAILABLE",
+      "scope_reason": "Plans did not load after address submission",
+      "num_offers": 0,
+      "offer_names": [],
+      "final_url": "https://frontier.com/buy",
+      "elapsed_s": 65.04235291481018,
+      "llm_calls": 0,
+      "outcome": "completed",
+      "healer": "dca_recipe_engine.steps.healers.frontier",
+      "crawl_backend": "legacy/frontier_batch_stealth.py"
+    }
+  ]
+}

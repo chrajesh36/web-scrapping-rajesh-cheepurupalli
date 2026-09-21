@@ -1,0 +1,32 @@
+{
+  "checked": "2026-09-21T12:44:16.257647",
+  "results": [
+    {
+      "provider": "frontier",
+      "address": "1308 Chase St, Novato, CA 94945",
+      "scope": "UNKNOWN_ADDRESS",
+      "scope_reason": "No address field",
+      "offers": [],
+      "llm_calls": 0,
+      "outcome": "ERROR_PROCESSING"
+    },
+    {
+      "provider": "frontier",
+      "address": "25 Crestwood Dr, West Haven, CT 06516",
+      "scope": "UNKNOWN_ADDRESS",
+      "scope_reason": "No address field",
+      "offers": [],
+      "llm_calls": 0,
+      "outcome": "ERROR_PROCESSING"
+    },
+    {
+      "provider": "frontier",
+      "address": "1522 Ridgewood Dr, Garland, TX 75041",
+      "scope": "UNKNOWN_ADDRESS",
+      "scope_reason": "No address field",
+      "offers": [],
+      "llm_calls": 0,
+      "outcome": "ERROR_PROCESSING"
+    }
+  ]
+}

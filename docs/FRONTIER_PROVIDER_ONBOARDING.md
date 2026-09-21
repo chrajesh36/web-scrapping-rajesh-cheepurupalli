@@ -92,3 +92,11 @@ Copy these paths into `apm0015603-deadshot-plugins-ai`:
 
 Replace local `dca_recipe_engine` stubs with the real engine package already
 in that repo (keep only the Frontier healer override).
+
+## Important — bot-detection code is not replaced
+
+In **this** research repo, live crawling still uses **`legacy/` nodriver L6**
+scripts unchanged. The `dca_frontier` Playwright modules are packaging /
+drop-in artifacts for deadshot-plugins-ai only.
+
+`crawler/run_addresses.py` → `legacy/frontier_batch_stealth.check_address`.

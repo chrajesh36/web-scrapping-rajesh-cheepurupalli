@@ -56,7 +56,9 @@ from behavior import (
 FRONTIER_URL = "https://frontier.com/shop/internet"
 WARMUP_URL = "https://frontier.com/why-frontier"
 ADDRESS = "2727 LBJ Freeway, Dallas, TX 75234"
-LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "frontier")
+LOGS_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs", "frontier"
+)
 LEVEL_NAME = "frontier_level6_stealth_max"
 
 
