@@ -16,6 +16,7 @@ deadshot-plugins-ai as a Tier-1 deterministic provider.
 | `docs/BOT_EVASION.md` | Five-layer evasion map |
 | `docs/FRONTIER_PROVIDER_ONBOARDING.md` | Deadshot onboarding |
 | `legacy/` | L3–L6 runners (import bot-detection via shims) |
+| `reference/frontier_l6_best/` | **Self-contained best L6 (score 5/100)** — copy to another laptop |
 | `logs/`, `reports/` | Captures / Word reports |
 
 ## Setup
