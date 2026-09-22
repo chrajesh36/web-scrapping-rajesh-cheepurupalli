@@ -19,8 +19,11 @@ and are **not** used for live crawl here.
 1. **TLS / protocol** — nodriver raw CDP + system Chrome (no Playwright handshake)
 2. **IP reputation** — `--proxy` / `FRONTIER_PROXY` on all runners; fresh browser per address
 3. **Sensor / cookies** — multi-page warmup; wait for `_abck` flag `0` before CHECK when possible
-4. **Behavior** — `behavior.py` Bezier mouse, log-normal typing, `rich_warmup` scrolls/hovers
+4. **Behavior** — `dca_bot_detection.behavior` Bezier mouse, log-normal typing, `rich_warmup`
 5. **Session** — `/why-frontier` → `/shop/internet` → `/buy`; temp profile per address; cooldown between checks
+
+Methods catalog + live/Excel scoring: `docs/BOT_DETECTION_METHODS.md` and
+`crawler/dca_bot_detection/`.
 
 ## Soft-block vs hard ban
 

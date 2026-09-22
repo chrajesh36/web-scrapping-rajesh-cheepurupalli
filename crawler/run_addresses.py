@@ -48,7 +48,7 @@ async def run_one(address: str, state: str = "", market: str = "",
     print(f"crawl=legacy/frontier_batch_stealth.check_address (bot-detection unchanged)")
     r = await asyncio.wait_for(
         check_address(address, state or "??", market or "smoke", proxy),
-        timeout=180.0,
+        timeout=240.0,
     )
     scope = _map_scope(r.scope)
     out = {
@@ -63,6 +63,10 @@ async def run_one(address: str, state: str = "", market: str = "",
         "final_url": r.final_url,
         "elapsed_s": r.elapsed_s,
         "llm_calls": 0,
+        "detection_score": r.detection_score,
+        "detection_verdict": r.detection_verdict,
+        "abck_flag": r.abck_flag,
+        "detection_metrics": r.detection_metrics,
         "outcome": "completed" if scope != "UNKNOWN_ADDRESS" or r.num_offers else (
             "ERROR_PROCESSING" if "not found" in (r.reason or "").lower()
             or "field" in (r.reason or "").lower()
@@ -71,7 +75,7 @@ async def run_one(address: str, state: str = "", market: str = "",
         "healer": "dca_recipe_engine.steps.healers.frontier",
         "crawl_backend": "legacy/frontier_batch_stealth.py",
     }
-    print(f"outcome={out['outcome']} llm_calls=0 scope={scope}")
+    print(f"outcome={out['outcome']} llm_calls=0 scope={scope} detection={r.detection_score}/100")
     print(json.dumps(out, indent=2)[:1500])
     return out
 
@@ -145,11 +149,14 @@ def main() -> None:
     print("\n=== SUMMARY ===")
     for r in results:
         print(
-            f"  {r.get('scope', '?'):<24} offers={r.get('num_offers', len(r.get('offer_names') or []))} "
+            f"  {r.get('scope', '?'):<24} det={r.get('detection_score', '?')}/100 "
+            f"offers={r.get('num_offers', len(r.get('offer_names') or []))} "
             f"outcome={r.get('outcome')} llm={r.get('llm_calls')}"
         )
         print(f"    {r.get('address')}")
         print(f"    {str(r.get('scope_reason', ''))[:120]}")
+        if r.get("detection_verdict"):
+            print(f"    detection: {r.get('detection_verdict')}")
     print(f"Saved {path}")
 
 

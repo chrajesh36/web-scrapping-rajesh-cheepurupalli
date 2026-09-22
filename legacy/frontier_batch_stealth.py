@@ -19,6 +19,7 @@ import json
 import os
 import random
 import re
+import sys
 import tempfile
 import time
 from dataclasses import dataclass, field
@@ -26,10 +27,15 @@ from datetime import datetime
 
 import nodriver as uc
 
+_CRAWLER = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "crawler")
+if _CRAWLER not in sys.path:
+    sys.path.insert(0, _CRAWLER)
+
 from behavior import (
     async_bezier_mouse_move,
     async_lognormal_type,
 )
+from dca_bot_detection.session_score import score_session
 from frontier_level6_stealth_max import get_abck_flag, rich_warmup
 
 FRONTIER_BUY = "https://frontier.com/buy"
@@ -58,6 +64,11 @@ class AddressResult:
     offer_names: list[str] = field(default_factory=list)
     final_url: str = ""
     elapsed_s: float = 0.0
+    # Bot-detection scoring (restored — was missing from live path)
+    detection_score: int = 0
+    detection_verdict: str = ""
+    abck_flag: str = ""
+    detection_metrics: dict = field(default_factory=dict)
 
 
 def load_addresses() -> list[dict]:
@@ -136,6 +147,38 @@ async def dismiss_banner(tab) -> None:
             continue
 
 
+def _attach_detection_score(
+    result: AddressResult,
+    *,
+    abck_flag: str = "",
+    address_field_present: bool = True,
+    soft_block_technical: bool = False,
+    plans_loaded: bool = False,
+    mover_seen: bool = False,
+) -> AddressResult:
+    """Attach bot-detection methods score to the address result."""
+    sc = score_session(
+        abck_flag=abck_flag,
+        address_field_present=address_field_present,
+        soft_block_technical=soft_block_technical
+        or "technical difficulties" in (result.reason or "").lower(),
+        plans_loaded=plans_loaded or result.num_offers > 0,
+        mover_seen=mover_seen,
+        scope_reason=result.reason,
+    )
+    result.detection_score = sc.detection_score
+    result.detection_verdict = sc.verdict
+    result.abck_flag = sc.abck_flag
+    result.detection_metrics = sc.to_dict()
+    print(
+        f"    DETECTION_SCORE={sc.detection_score}/100  verdict={sc.verdict}  "
+        f"abck={sc.abck_flag or '?'}"
+    )
+    for n in sc.notes:
+        print(f"      • {n}")
+    return result
+
+
 # ── Single address check in a FRESH browser ──────────────────────────────
 
 async def check_address(address: str, state: str, market: str,
@@ -159,6 +202,8 @@ async def check_address(address: str, state: str, market: str,
         browser_args.append(f"--proxy-server={proxy}")
 
     browser = None
+    abck_flag = ""
+    mover_seen = False
     try:
         browser = await uc.start(
             headless=False,
@@ -187,13 +232,14 @@ async def check_address(address: str, state: str, market: str,
         await dismiss_banner(tab)
         await tab.evaluate("window.scrollTo(0, 0)")
         for i in range(12):
-            flag = await get_abck_flag(tab)
-            if flag == "0":
+            abck_flag = await get_abck_flag(tab)
+            if abck_flag == "0":
                 print(f"    _abck validated (0) before CHECK at wait {i+1}")
                 break
             await asyncio.sleep(2)
         else:
-            print(f"    _abck still {await get_abck_flag(tab)} — proceeding carefully")
+            abck_flag = await get_abck_flag(tab)
+            print(f"    _abck still {abck_flag} — proceeding carefully")
 
         # Address field
         field = await tab.query_selector("#street-address")
@@ -203,7 +249,11 @@ async def check_address(address: str, state: str, market: str,
             result.scope = "INVALID_ADDRESS"
             result.reason = "Address field not found (soft-block / bot score)"
             browser.stop()
-            return result
+            return _attach_detection_score(
+                result,
+                abck_flag=abck_flag,
+                address_field_present=False,
+            )
 
         # Clear with React-safe setter
         await tab.evaluate("""
@@ -263,10 +313,11 @@ async def check_address(address: str, state: str, market: str,
             result.scope = "INVALID_ADDRESS"
             result.reason = "CHECK AVAILABILITY button not found"
             browser.stop()
-            return result
+            return _attach_detection_score(
+                result, abck_flag=abck_flag, address_field_present=True
+            )
 
         # Wait for plans / mover / soft errors (mover can be below fold)
-        mover_seen = False
         page_text = ""
         for _ in range(16):
             await asyncio.sleep(2.5)
@@ -297,9 +348,12 @@ async def check_address(address: str, state: str, market: str,
                 break
             await tab.scroll_down(200)
 
+        abck_flag = await get_abck_flag(tab) or abck_flag
         final_url = await tab.evaluate("location.href") or ""
         result.final_url = final_url
         page_lower = (page_text or "").lower()
+        soft_tech = "technical difficulties" in page_lower
+        plans_loaded = False
 
         if "allconnect.com" in final_url:
             result.scope = "PROVIDER_NOT_AVAILABLE"
@@ -317,6 +371,7 @@ async def check_address(address: str, state: str, market: str,
             elif has_pricing and has_plans:
                 result.scope = "PROSPECT_CUSTOMER"
                 result.reason = "Plans with pricing found"
+                plans_loaded = True
                 try:
                     plans_raw = await tab.evaluate("""
                         JSON.stringify((() => {
@@ -338,7 +393,7 @@ async def check_address(address: str, state: str, market: str,
             elif "isn't available" in page_lower or "not available at your address" in page_lower:
                 result.scope = "PROVIDER_NOT_AVAILABLE"
                 result.reason = "Frontier not available at this address"
-            elif "technical difficulties" in page_lower:
+            elif soft_tech:
                 result.scope = "PROVIDER_NOT_AVAILABLE"
                 result.reason = (
                     "Technical difficulties soft-block "
@@ -355,6 +410,14 @@ async def check_address(address: str, state: str, market: str,
             result.reason = f"Unexpected redirect: {final_url[:60]}"
 
         browser.stop()
+        _attach_detection_score(
+            result,
+            abck_flag=abck_flag,
+            address_field_present=True,
+            soft_block_technical=soft_tech,
+            plans_loaded=plans_loaded,
+            mover_seen=mover_seen,
+        )
 
     except Exception as exc:
         result.scope = "INVALID_ADDRESS"
@@ -364,6 +427,11 @@ async def check_address(address: str, state: str, market: str,
                 browser.stop()
         except Exception:
             pass
+        _attach_detection_score(
+            result,
+            abck_flag=abck_flag,
+            address_field_present=False,
+        )
 
     result.elapsed_s = time.time() - start
     return result
@@ -398,16 +466,20 @@ async def run_batch(max_addr: int | None = None, skip_cached: bool = False,
         try:
             r = await asyncio.wait_for(
                 check_address(addr, state, market, proxy),
-                timeout=120.0,
+                timeout=240.0,
             )
         except asyncio.TimeoutError:
             r = AddressResult(address=addr, state=state, market=market,
                               scope="INVALID_ADDRESS",
-                              reason="Hard timeout (120s)", elapsed_s=120.0)
+                              reason="Hard timeout (240s)", elapsed_s=240.0)
+            _attach_detection_score(r, address_field_present=False)
 
         icon = {"PROSPECT_CUSTOMER": "✅", "CURRENT_CUSTOMER": "🔵",
                 "PROVIDER_NOT_AVAILABLE": "❌", "INVALID_ADDRESS": "⚠️"}.get(r.scope, "❓")
-        print(f"         {icon} {r.scope} ({r.elapsed_s:.0f}s) — {r.reason[:60]}")
+        print(
+            f"         {icon} {r.scope} det={r.detection_score}/100 "
+            f"({r.elapsed_s:.0f}s) — {r.reason[:55]}"
+        )
 
         results.append(r)
         merged[addr] = {
@@ -415,6 +487,10 @@ async def run_batch(max_addr: int | None = None, skip_cached: bool = False,
             "scope": r.scope, "reason": r.reason,
             "num_offers": r.num_offers, "offer_names": r.offer_names,
             "final_url": r.final_url, "last_checked": datetime.now().isoformat(),
+            "detection_score": r.detection_score,
+            "detection_verdict": r.detection_verdict,
+            "abck_flag": r.abck_flag,
+            "detection_metrics": r.detection_metrics,
         }
 
         # Save after each address
@@ -430,22 +506,28 @@ async def run_batch(max_addr: int | None = None, skip_cached: bool = False,
 
 
 def print_summary(results: list[AddressResult]) -> None:
-    print(f"\n\n{'='*120}")
-    print(f"  RESULTS — {len(results)} addresses")
-    print(f"{'='*120}")
-    print(f"{'#':>3} {'State':>5} {'Scope':<26} {'Time':>5} {'Address':<50} {'Reason'}")
-    print(f"{'─'*3} {'─'*5} {'─'*26} {'─'*5} {'─'*50} {'─'*50}")
+    print(f"\n\n{'='*130}")
+    print(f"  RESULTS — {len(results)} addresses (with bot-detection scores)")
+    print(f"{'='*130}")
+    print(f"{'#':>3} {'St':>3} {'Scope':<24} {'Det':>5} {'Time':>5} {'Address':<45} {'Reason'}")
+    print(f"{'─'*3} {'─'*3} {'─'*24} {'─'*5} {'─'*5} {'─'*45} {'─'*40}")
 
     for i, r in enumerate(results):
         icon = {"PROSPECT_CUSTOMER": "✅", "CURRENT_CUSTOMER": "🔵",
                 "PROVIDER_NOT_AVAILABLE": "❌", "INVALID_ADDRESS": "⚠️"}.get(r.scope, "❓")
-        print(f"{i+1:>3} {r.state:>5} {icon} {r.scope:<24} {r.elapsed_s:>4.0f}s {r.address:<50} {r.reason[:50]}")
+        print(
+            f"{i+1:>3} {r.state:>3} {icon} {r.scope:<22} {r.detection_score:>3}/100 "
+            f"{r.elapsed_s:>4.0f}s {r.address:<45} {r.reason[:40]}"
+        )
 
     from collections import Counter
     counts = Counter(r.scope for r in results)
     print(f"\n  Totals:")
     for scope, count in counts.most_common():
         print(f"    {scope}: {count}")
+    if results:
+        avg = sum(r.detection_score for r in results) / len(results)
+        print(f"  Avg detection score: {avg:.0f}/100 (0=human, 100=blocked)")
 
 
 def main():
@@ -469,7 +551,7 @@ def main():
             print(f"\n  Checking: {addr}")
             r = await asyncio.wait_for(
                 check_address(addr, state or "??", "manual", args.proxy),
-                timeout=120.0,
+                timeout=240.0,
             )
             return [r]
         results = uc.loop().run_until_complete(_one())
@@ -480,6 +562,10 @@ def main():
                 "scope": r.scope, "reason": r.reason,
                 "num_offers": r.num_offers, "offer_names": r.offer_names,
                 "final_url": r.final_url, "last_checked": datetime.now().isoformat(),
+                "detection_score": r.detection_score,
+                "detection_verdict": r.detection_verdict,
+                "abck_flag": r.abck_flag,
+                "detection_metrics": r.detection_metrics,
             }
         save_results(existing)
     else:
@@ -491,9 +577,21 @@ def main():
     log_path = os.path.join(LOGS_DIR, f"stealth_batch_{ts}.json")
     os.makedirs(LOGS_DIR, exist_ok=True)
     with open(log_path, "w") as f:
-        json.dump({"results": [{"address": r.address, "state": r.state, "scope": r.scope,
-                                 "reason": r.reason, "elapsed_s": r.elapsed_s} for r in results]},
-                  f, indent=2)
+        json.dump({
+            "results": [
+                {
+                    "address": r.address,
+                    "state": r.state,
+                    "scope": r.scope,
+                    "reason": r.reason,
+                    "elapsed_s": r.elapsed_s,
+                    "detection_score": r.detection_score,
+                    "detection_verdict": r.detection_verdict,
+                    "abck_flag": r.abck_flag,
+                }
+                for r in results
+            ]
+        }, f, indent=2)
     print(f"\n  Log → {log_path}")
     print(f"  Scopes → {RESULTS_FILE}")
 
